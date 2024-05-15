@@ -1,0 +1,26 @@
+name: Deploy to Staging
+
+on:
+  workflow_run:
+    workflows: ["Deploy to Deployment"]
+    branches: [dev]
+    types: ["completed"]
+  # addition triggers could be added in the future (tags, etc)
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: staging
+      url: https://staging.example.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deployment
+        run: |
+          echo "Deploying to Staging Environment"
+          sleep 60
+          # Deployment steps...
+          echo "done"
