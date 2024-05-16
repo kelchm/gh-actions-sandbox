@@ -48,7 +48,7 @@ jobs:
 
       - name: Smoke Tests
         run: |
-          echo "Running Smoke Tests for Staging Environment"
+          echo "Running Smoke Tests"
           sleep 10
           echo "done"
 
