@@ -7,6 +7,7 @@ on:
 
 jobs:
   tests:
+    name: CI Checks
     uses: ./.github/workflows/ci-checks.yml  # call reusable ci-checks workflow
 
   deploy-dev:
@@ -31,7 +32,6 @@ jobs:
           echo "done"
 
   deploy-staging:
-    name: Deploy (Staging)
     needs: [tests, deploy-dev]
     runs-on: ubuntu-latest
     environment:
@@ -48,5 +48,25 @@ jobs:
       - name: Smoke Tests
         run: |
           echo "Running Smoke Tests for Staging Environment"
+          sleep 10
+          echo "done"
+
+  deploy-prod:
+    needs: [tests, deploy-staging]
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://www.example.com
+    steps:
+      - name: Deployment
+        run: |
+          echo "Deploying to Production Environment"
+          sleep 30
+          # Deployment steps...
+          echo "done"
+
+      - name: Smoke Tests
+        run: |
+          echo "Running Smoke Tests for Production Environment"
           sleep 10
           echo "done"
