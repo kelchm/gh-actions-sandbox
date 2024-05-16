@@ -1,0 +1,23 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  tests:
+    name: CI Checks
+    uses: ./.github/workflows/ci-checks.yml  # call reusable ci-checks workflow
+
+  deploy-dev:
+    needs: [tests]  # require tests to pass before deploy runs
+    uses: ./.github/workflows/deploy-job.yml
+    with:
+      environment: dev
+
+  deploy-staging:
+    needs: [deploy-dev]
+    uses: ./.github/workflows/deploy-job.yml
+    with:
+      environment: staging

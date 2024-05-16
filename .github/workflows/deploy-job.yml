@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+      # url: ${{ inputs.url }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deployment
+        run: |
+          echo "Deploying to ${{ inputs.environment }} Environment"
+          sleep 30
+          # Deployment steps...
+          echo "done"
+
+      - name: Smoke Tests
+        run: |
+          echo "Running Smoke Tests for ${{ inputs.environment }} Environment"
+          sleep 10
+          echo "done"
