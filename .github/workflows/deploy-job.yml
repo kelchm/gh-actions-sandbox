@@ -6,6 +6,13 @@ on:
       environment:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: environment
+        description: 'The target environment for deployment'
+        default: 'dev'
 
 jobs:
   deploy-job:
