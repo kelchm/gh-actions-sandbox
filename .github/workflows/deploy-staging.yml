@@ -3,10 +3,8 @@ name: Deploy to Staging
 on:
   workflow_run:
     workflows: ["Deploy to Deployment"]
-    branches: [dev]
     types: ["completed"]
   # addition triggers could be added in the future (tags, etc)
-
 
 jobs:
   deploy:
