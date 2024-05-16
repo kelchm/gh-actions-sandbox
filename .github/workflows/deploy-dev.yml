@@ -20,6 +20,6 @@ jobs:
       - name: Deploy
         run: |
           echo "Deploying to Dev Environment"
-          sleep 60
+          sleep 30
           # Deployment steps...
           echo "done"

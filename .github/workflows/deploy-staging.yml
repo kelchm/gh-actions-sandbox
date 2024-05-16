@@ -2,7 +2,7 @@ name: Deploy to Staging
 
 on:
   workflow_run:
-    workflows: ["Deploy to Deployment"]
+    workflows: ["Deploy to Development"]
     types: ["completed"]
   # addition triggers could be added in the future (tags, etc)
 
@@ -20,6 +20,6 @@ jobs:
       - name: Deployment
         run: |
           echo "Deploying to Staging Environment"
-          sleep 60
+          sleep 30
           # Deployment steps...
           echo "done"
