@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Job
 
 on:
   workflow_call:
@@ -9,10 +9,11 @@ on:
 
 jobs:
   deploy:
+    name: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
-      # url: ${{ inputs.url }}
+      url: "https://${{ inputs.environment }}.example.com"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
