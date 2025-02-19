@@ -22,19 +22,22 @@ jobs:
     environment:
       name: ${{ inputs.environment }}
       url: "https://${{ inputs.environment }}.example.com"
+    strategy:
+      matrix:
+        service: ['service-a', 'service-b', 'service-c']  # Define your services here
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Deployment
         run: |
-          echo "Deploying to ${{ inputs.environment }} Environment"
+          echo "Deploying ${{ matrix.service }} to ${{ inputs.environment }} Environment"
           sleep 30
-          # Deployment steps...
+          # Deployment steps for ${{ matrix.service }}...
           echo "done"
 
       - name: Smoke Tests
         run: |
-          echo "Running Smoke Tests for ${{ inputs.environment }} Environment"
+          echo "Running Smoke Tests for ${{ matrix.service }} in ${{ inputs.environment }} Environment"
           sleep 10
           echo "done"
